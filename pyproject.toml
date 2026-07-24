@@ -42,7 +42,7 @@ strict = true
 exclude = [".venv"]
 
 [[tool.mypy.overrides]]
-module = ["sklearn", "sklearn.metrics", "h5py", "tqdm"]
+module = ["sklearn", "sklearn.*", "h5py", "tqdm"]
 ignore_missing_imports = true
 
 [tool.ruff]
