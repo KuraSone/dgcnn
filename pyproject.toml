@@ -50,6 +50,26 @@ url = "https://download.pytorch.org/whl/cu132"
 explicit = true
 
 [[tool.uv.index]]
+name = "pyg-cpu"
+url = "https://data.pyg.org/whl/torch-2.13.0+cpu.html"
+explicit = true
+
+[[tool.uv.index]]
+name = "pyg-cu118"
+url = "https://data.pyg.org/whl/torch-2.7.1+cu118.html"
+explicit = true
+
+[[tool.uv.index]]
+name = "pyg-cu126"
+url = "https://data.pyg.org/whl/torch-2.13.0+cu126.html"
+explicit = true
+
+[[tool.uv.index]]
+name = "pyg-cu132"
+url = "https://data.pyg.org/whl/torch-2.13.0+cu132.html"
+explicit = true
+
+[[tool.uv.index]]
 name = "miropsota"
 url = "https://miropsota.github.io/torch_packages_builder"
 explicit = true
@@ -67,6 +87,12 @@ torch = [
     { index = "pytorch-cu132", group = "cu132" },
 ]
 pytorch3d = { index = "miropsota" }
+torch_cluster = [
+    { index = "pyg-cpu", group = "cpu" },
+    { index = "pyg-cu118", group = "cu118" },
+    { index = "pyg-cu126", group = "cu126" },
+    { index = "pyg-cu132", group = "cu132" },
+]
 
 [tool.uv.dependency-groups]
 cpu = { requires-python = ">=3.14" }
