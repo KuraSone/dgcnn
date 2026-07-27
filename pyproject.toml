@@ -1,52 +1,33 @@
 [project]
 name = "dgcnn"
 version = "0.1.0"
-requires-python = "==3.13.*"
+requires-python = ">=3.13"
 dependencies = [
-    "h5py>=3.16.0",
-    "scikit-learn>=1.8.0",
-    "tqdm>=4.69.0",
+    "h5py",
+    "scikit-learn",
+    "tqdm",
 ]
 
 [dependency-groups]
 dev = [
-    "mypy>=2.1.0",
+    "mypy",
 ]
 cpu = [
-    "torch>=2.13.0",
+    "torch==2.13.0",
+    "pytorch3d==0.7.9+d9839a9pt2.13.0cpu",
 ]
 cu118 = [
     "torch>=2.7.1",
+    "pytorch3d==0.7.9+d9839a9pt2.7.1cu118",
 ]
 cu126 = [
-    "torch>=2.12.1",
+    "torch==2.13.0",
+    "pytorch3d==0.7.9+d9839a9pt2.13.0cu126",
 ]
 cu132 = [
-    "torch>=2.12.1",
+    "torch==2.13.0",
+    "pytorch3d==0.7.9+d9839a9pt2.13.0cu132",
 ]
-[tool.uv]
-conflicts = [
-    [{ group = "cpu" }, { group = "cu118" }, { group = "cu126" }, { group = "cu132" }]
-]
-
-[tool.uv.sources]
-torch = [
-    { index = "pytorch-cpu", group = "cpu" },
-    { index = "pytorch-cu118", group = "cu118" },
-    { index = "pytorch-cu126", group = "cu126" },
-    { index = "pytorch-cu132", group = "cu132" },
-]
-
-[tool.mypy]
-strict = true
-exclude = [".venv"]
-
-[[tool.mypy.overrides]]
-module = ["sklearn", "sklearn.*", "h5py", "tqdm"]
-ignore_missing_imports = true
-
-[tool.ruff]
-target-version = "py313"
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
@@ -67,3 +48,39 @@ explicit = true
 name = "pytorch-cu132"
 url = "https://download.pytorch.org/whl/cu132"
 explicit = true
+
+[[tool.uv.index]]
+name = "miropsota"
+url = "https://miropsota.github.io/torch_packages_builder"
+explicit = true
+
+[tool.uv]
+conflicts = [
+    [{ group = "cpu" }, { group = "cu118" }, { group = "cu126" }, { group = "cu132" }]
+]
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-cpu", group = "cpu" },
+    { index = "pytorch-cu118", group = "cu118" },
+    { index = "pytorch-cu126", group = "cu126" },
+    { index = "pytorch-cu132", group = "cu132" },
+]
+pytorch3d = { index = "miropsota" }
+
+[tool.uv.dependency-groups]
+cpu = { requires-python = ">=3.14" }
+cu118 = { requires-python = ">=3.13" }
+cu126 = { requires-python = ">=3.14" }
+cu132 = { requires-python = ">=3.14" }
+
+[tool.ruff]
+target-version = "py313"
+
+[tool.mypy]
+strict = true
+exclude = [".venv"]
+
+[[tool.mypy.overrides]]
+module = ["sklearn", "sklearn.*", "h5py", "tqdm"]
+ignore_missing_imports = true
