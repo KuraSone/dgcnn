@@ -17,6 +17,7 @@ cpu = [
     "pyg-lib",
     "kaolin",
     "pytorch3d==0.7.9+d9839a9pt2.8.0cpu",
+    "torch-geometric>=2.8.0.post1",
 ]
 cu118 = [
     "torch==2.7.1",
