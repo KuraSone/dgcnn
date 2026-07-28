@@ -14,12 +14,14 @@ dev = [
 cpu = [
     "torch==2.8.0",
     "torch-cluster",
+    "pyg-lib",
     "kaolin",
     "pytorch3d==0.7.9+d9839a9pt2.8.0cpu",
 ]
 cu118 = [
     "torch==2.7.1",
     "torch-cluster",
+    "pyg-lib",
     "kaolin",
     "pytorch3d==0.7.9+d9839a9pt2.7.1cu118",
     "flash-attn==2.8.3+pt2.7.0cu118",
@@ -27,6 +29,7 @@ cu118 = [
 cu126 = [
     "torch==2.8.0",
     "torch-cluster",
+    "pyg-lib",
     "kaolin",
     "pytorch3d==0.7.9+d9839a9pt2.8.0cu126",
     "flash-attn==2.8.3+cu126torch2.8",
@@ -34,6 +37,7 @@ cu126 = [
 cu128 = [
     "torch==2.8.0",
     "torch-cluster",
+    "pyg-lib",
     "kaolin",
     "pytorch3d==0.7.9+d9839a9pt2.8.0cu128",
     "flash-attn==2.8.3+cu128torch2.8",
@@ -61,6 +65,12 @@ torch = [
     { index = "pytorch-cu128", group = "cu128" },
 ]
 torch-cluster = [
+    { index = "pyg-cpu",   group = "cpu" },
+    { index = "pyg-cu118", group = "cu118" },
+    { index = "pyg-cu126", group = "cu126" },
+    { index = "pyg-cu128", group = "cu128" },
+]
+pyg-lib = [
     { index = "pyg-cpu",   group = "cpu" },
     { index = "pyg-cu118", group = "cu118" },
     { index = "pyg-cu126", group = "cu126" },
