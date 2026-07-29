@@ -1,10 +1,11 @@
 [project]
 name = "dgcnn"
 version = "0.1.0"
-requires-python = ">=3.12,<3.13"
+requires-python = ">=3.10"
 dependencies = [
     "h5py",
     "scikit-learn",
+    "tensorboard",
 ]
 
 [dependency-groups]
@@ -12,38 +13,41 @@ dev = [
     "mypy",
 ]
 cpu = [
-    "torch==2.8.0",
-    "torch-cluster",
-    "pyg-lib",
     "kaolin",
+    "pyg-lib",
     "pytorch3d==0.7.9+d9839a9pt2.8.0cpu",
+    "torch==2.8.0",
     "torch-geometric==2.7.*",
 ]
+cu102 = [
+    "numpy<2",
+    "pyg-lib; sys_platform == 'linux'",
+    "setuptools<81",
+    "torch==1.12.1+cu102; sys_platform == 'linux'",
+    "torch-geometric==2.6.*",
+]
 cu118 = [
-    "torch==2.7.1",
-    "torch-cluster",
-    "pyg-lib",
-    "kaolin",
-    "pytorch3d==0.7.9+d9839a9pt2.7.1cu118",
     "flash-attn==2.8.3+pt2.7.0cu118",
+    "kaolin",
+    "pyg-lib",
+    "pytorch3d==0.7.9+d9839a9pt2.7.1cu118",
+    "torch==2.7.1",
     "torch-geometric==2.7.*",
 ]
 cu126 = [
-    "torch==2.8.0",
-    "torch-cluster",
-    "pyg-lib",
-    "kaolin",
-    "pytorch3d==0.7.9+d9839a9pt2.8.0cu126",
     "flash-attn==2.8.3+cu126torch2.8",
+    "kaolin",
+    "pyg-lib",
+    "pytorch3d==0.7.9+d9839a9pt2.8.0cu126",
+    "torch==2.8.0",
     "torch-geometric==2.7.*",
 ]
 cu128 = [
-    "torch==2.8.0",
-    "torch-cluster",
-    "pyg-lib",
-    "kaolin",
-    "pytorch3d==0.7.9+d9839a9pt2.8.0cu128",
     "flash-attn==2.8.3+cu128torch2.8",
+    "kaolin",
+    "pyg-lib",
+    "pytorch3d==0.7.9+d9839a9pt2.8.0cu128",
+    "torch==2.8.0",
     "torch-geometric==2.7.*",
 ]
 
@@ -55,38 +59,21 @@ environments = [
 conflicts = [
     [
         { group = "cpu" },
+        { group = "cu102" },
         { group = "cu118" },
         { group = "cu126" },
         { group = "cu128" },
     ],
 ]
 
+[tool.uv.dependency-groups]
+cpu = { requires-python = "==3.12.*" }
+cu102 = { requires-python = "==3.10.*" }
+cu118 = { requires-python = "==3.12.*" }
+cu126 = { requires-python = "==3.12.*" }
+cu128 = { requires-python = "==3.12.*" }
+
 [tool.uv.sources]
-torch = [
-    { index = "pytorch-cpu",   group = "cpu" },
-    { index = "pytorch-cu118", group = "cu118" },
-    { index = "pytorch-cu126", group = "cu126" },
-    { index = "pytorch-cu128", group = "cu128" },
-]
-torch-cluster = [
-    { index = "pyg-cpu",   group = "cpu" },
-    { index = "pyg-cu118", group = "cu118" },
-    { index = "pyg-cu126", group = "cu126" },
-    { index = "pyg-cu128", group = "cu128" },
-]
-pyg-lib = [
-    { index = "pyg-cpu",   group = "cpu" },
-    { index = "pyg-cu118", group = "cu118" },
-    { index = "pyg-cu126", group = "cu126" },
-    { index = "pyg-cu128", group = "cu128" },
-]
-kaolin = [
-    { index = "kaolin-cpu",   group = "cpu" },
-    { index = "kaolin-cu118", group = "cu118" },
-    { index = "kaolin-cu126", group = "cu126" },
-    { index = "kaolin-cu128", group = "cu128" },
-]
-pytorch3d = { index = "miropsota" }
 flash_attn = [
     { url = "https://github.com/MiroPsota/torch_packages_builder/releases/download/flash_attn-2.8.3/flash_attn-2.8.3%2Bpt2.7.0cu118-cp312-cp312-win_amd64.whl", marker = "sys_platform == 'win32'", group = "cu118" },
     { url = "https://github.com/MiroPsota/torch_packages_builder/releases/download/flash_attn-2.8.3/flash_attn-2.8.3%2Bpt2.7.0cu118-cp312-cp312-linux_x86_64.whl", marker = "sys_platform == 'linux'", group = "cu118" },
@@ -95,10 +82,36 @@ flash_attn = [
     { url = "https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.11/flash_attn-2.8.3%2Bcu128torch2.8-cp312-cp312-win_amd64.whl", marker = "sys_platform == 'win32'", group = "cu128" },
     { url = "https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.16/flash_attn-2.8.3%2Bcu128torch2.8-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", marker = "sys_platform == 'linux'", group = "cu128" },
 ]
+kaolin = [
+    { index = "kaolin-cpu",   group = "cpu" },
+    { index = "kaolin-cu118", group = "cu118" },
+    { index = "kaolin-cu126", group = "cu126" },
+    { index = "kaolin-cu128", group = "cu128" },
+]
+pyg-lib = [
+    { index = "pyg-cpu",   group = "cpu" },
+    { index = "pyg-cu102", group = "cu102" },
+    { index = "pyg-cu118", group = "cu118" },
+    { index = "pyg-cu126", group = "cu126" },
+    { index = "pyg-cu128", group = "cu128" },
+]
+pytorch3d = { index = "miropsota" }
+torch = [
+    { index = "pytorch-cpu",   group = "cpu" },
+    { index = "pytorch-cu102", group = "cu102" },
+    { index = "pytorch-cu118", group = "cu118" },
+    { index = "pytorch-cu126", group = "cu126" },
+    { index = "pytorch-cu128", group = "cu128" },
+]
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu102"
+url = "https://download.pytorch.org/whl/cu102"
 explicit = true
 
 [[tool.uv.index]]
@@ -119,6 +132,12 @@ explicit = true
 [[tool.uv.index]]
 name = "pyg-cpu"
 url = "https://data.pyg.org/whl/torch-2.8.0+cpu.html"
+explicit = true
+format = "flat"
+
+[[tool.uv.index]]
+name = "pyg-cu102"
+url = "https://data.pyg.org/whl/torch-1.12.1+cu102.html"
 explicit = true
 format = "flat"
 
@@ -170,7 +189,7 @@ url = "https://miropsota.github.io/torch_packages_builder"
 explicit = true
 
 [tool.ruff]
-target-version = "py312"
+target-version = "py310"
 
 [tool.mypy]
 strict = true
@@ -181,7 +200,6 @@ module = [
     "h5py",
     "flash_attn",
     "tqdm",
-    "torch_cluster",
     "sklearn",
     "sklearn.*",
 ]
