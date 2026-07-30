@@ -75,8 +75,7 @@ cu128 = { requires-python = "==3.12.*" }
 
 [tool.uv.sources]
 flash_attn = [
-    { url = "https://github.com/MiroPsota/torch_packages_builder/releases/download/flash_attn-2.8.3/flash_attn-2.8.3%2Bpt2.7.0cu118-cp312-cp312-win_amd64.whl", marker = "sys_platform == 'win32'", group = "cu118" },
-    { url = "https://github.com/MiroPsota/torch_packages_builder/releases/download/flash_attn-2.8.3/flash_attn-2.8.3%2Bpt2.7.0cu118-cp312-cp312-linux_x86_64.whl", marker = "sys_platform == 'linux'", group = "cu118" },
+    { index = "miropsota", group = "cu118" },
     { url = "https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.4.19/flash_attn-2.8.3%2Bcu126torch2.8-cp312-cp312-win_amd64.whl", marker = "sys_platform == 'win32'", group = "cu126" },
     { url = "https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.16/flash_attn-2.8.3%2Bcu126torch2.8-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", marker = "sys_platform == 'linux'", group = "cu126" },
     { url = "https://github.com/mjun0812/flash-attention-prebuild-wheels/releases/download/v0.7.11/flash_attn-2.8.3%2Bcu128torch2.8-cp312-cp312-win_amd64.whl", marker = "sys_platform == 'win32'", group = "cu128" },
@@ -103,6 +102,11 @@ torch = [
     { index = "pytorch-cu126", group = "cu126" },
     { index = "pytorch-cu128", group = "cu128" },
 ]
+
+[[tool.uv.index]]
+name = "local"
+url = "./wheels"
+format = "flat"
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
