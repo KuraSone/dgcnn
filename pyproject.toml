@@ -44,11 +44,11 @@ cu126 = [
 ]
 cu128 = [
     "flash-attn==2.8.3+pt2.8.0cu128; sys_platform == 'linux'",
-    "kaolin; sys_platform == 'linux'",
+    "kaolin",
     "pyg-lib; sys_platform == 'linux'",
-    "pytorch3d==0.7.9+d9839a9pt2.8.0cu128; sys_platform == 'linux'",
-    "torch==2.8.0; sys_platform == 'linux'",
-    "torch-geometric==2.7.*; sys_platform == 'linux'",
+    "pytorch3d==0.7.9+d9839a9pt2.8.0cu128",
+    "torch==2.8.0",
+    "torch-geometric==2.7.*",
 ]
 
 [tool.uv]
